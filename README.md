@@ -5,6 +5,7 @@ Utility scripts and configuration tweaks from the JetsonHacks project (https://g
 ## Repository layout
 - `installVSCode/` — Shell scripts for installing Visual Studio Code on arm64 Ubuntu, plus an option that also provisions Python tooling (pip, pylint, black, VS Code Python extension). Original repository: https://github.com/jetsonhacks/installVSCode
 - `jetson-orin-gpio-patch/` — Device tree overlay, kernel patch, and examples that fix GPIO direction handling on JetPack 6.2 for Jetson Orin-based kits. Original repository: https://github.com/jetsonhacks/jetson-orin-gpio-patch
+- `migrate-to-ssd/` — Steps to migrate a working SD-card install to an NVMe SSD and make the SSD the primary boot device, entirely from the Jetson itself. Based on: https://github.com/jetsonhacks/migrate-jetson-to-ssd
 
 ## Quick start
 1. Clone or download this repository on the Jetson you are configuring.
@@ -22,6 +23,8 @@ dtc -O dtb -o pins_as_gpio.dtbo pins_as_gpio.dts
 sudo cp pins_as_gpio.dtbo /boot
 sudo /opt/nvidia/jetson-io/jetson-io.py
 ```
+
+- **Boot from SSD**: Already running from an SD card and adding an NVMe SSD? Run `migrate-to-ssd/migrate-to-ssd.sh` (or the three vendored step scripts individually) to clone the install onto the SSD and make it the primary boot device — no host PC needed.
 
 ## Requirements
 - NVIDIA Jetson hardware running Ubuntu for Jetson (JetPack). The GPIO patch currently targets JetPack 6.2 on kernel 5.15.
